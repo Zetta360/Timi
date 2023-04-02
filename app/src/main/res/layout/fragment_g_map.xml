@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.GMap">
+
+    <fragment
+    android:id="@+id/map_fragment"
+    class="com.google.android.gms.maps.SupportMapFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
+
+    <SearchView
+        android:id="@+id/searchBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12.5dp"
+        android:tooltipText="Select your sustainable topic"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="12.5dp"
+        android:background="@drawable/bg_round_white"
+        android:outlineAmbientShadowColor="@color/black"
+        android:queryHint="pizza hub, nerdy coffee"
+        android:translationZ="15dp"
+        map:layout_constraintEnd_toEndOf="parent"
+        map:layout_constraintStart_toStartOf="parent"
+        map:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/bg_round_black"
+        android:clickable="true"
+        android:maxHeight="2000dp"
+        android:focusable="true"
+        android:isScrollContainer="true"
+        map:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:id="@+id/botView"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:outlineAmbientShadowColor="@color/white"
+            android:src="@drawable/ic_bot"
+            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintTop_toTopOf="parent" />
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            android:overScrollMode="always"
+            map:layout_constraintStart_toEndOf="@id/botView"
+            map:layout_constraintTop_toTopOf="parent" >
+
+            <TextView
+                android:id="@+id/botText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_round_white"
+                android:fontFamily="@font/poppins_regular"
+                android:maxHeight="2000dp"
+                android:hint="I'm here to assist you today to discover Eco Locations "
+                android:maxWidth="280dp"
+                android:textSize="10sp"
+                android:outlineAmbientShadowColor="@color/black"
+                android:scrollbars="vertical"/>
+
+        </ScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

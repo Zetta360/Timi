@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Timi Travel</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="night_mode">Night Mode</string>
+
+    <string name="map_id">6a4e12737bf8532e</string>
+    <string name="custom_marker">Custom Marker</string>
+
+</resources>
