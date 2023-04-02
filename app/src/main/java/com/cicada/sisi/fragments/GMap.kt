@@ -15,13 +15,13 @@ import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
-import androidx.core.view.drawToBitmap
+import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.FragmentActivity
 import com.cicada.sisi.R
 import com.cicada.sisi.animation.animateText
 import com.cicada.sisi.bot.search
 import com.cicada.sisi.data.EcoPlace
-import com.cicada.sisi.loadBitmapFromView
+import com.cicada.sisi.isDouble
 import com.cicada.sisi.manager.requestLocationPermission
 import com.cicada.sisi.removePartFromString
 import com.google.android.gms.location.LocationServices
@@ -38,6 +38,9 @@ class GMap : Fragment(), OnMapReadyCallback {
     private val REQUEST_LOCATION_PERMISSION = 1
     private lateinit var map : GoogleMap
     private var responseFromAI = false
+
+    private val oldCenterLat = 45.7536
+    private val oldCenterLong = 21.2289
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -190,11 +193,28 @@ class GMap : Fragment(), OnMapReadyCallback {
                 }
 
                 val namePlace = place.substring(0, index).trim()
-                val lat = placeWithoutName.substring(0, indexSecond).trim().toDouble()
-                val long = placeWithoutName.substring(
-                    indexSecond + 1,
-                    placeWithoutName.length
-                ).trim().toDouble()
+                val trim = placeWithoutName.substring(0, indexSecond).trim()
+                val lat : Double = if(trim.isDouble()) {
+
+                    trim.toDouble()
+                } else {
+
+                    oldCenterLat
+                }
+
+                val long : Double = if(placeWithoutName.substring(
+                        indexSecond + 1,
+                        placeWithoutName.length
+                    ).trim().isDouble()) {
+
+                    placeWithoutName.substring(
+                        indexSecond + 1,
+                        placeWithoutName.length
+                    ).trim().toDouble()
+                } else {
+
+                    oldCenterLong
+                }
 
                 return Triple(namePlace, lat, long)
             }
@@ -272,8 +292,6 @@ class GMap : Fragment(), OnMapReadyCallback {
         (latitude: Double, longitude: Double) -> Unit) {
 
         // Default info for the Old Center of Timisioara
-        val oldCenterLat = 45.7536
-        val oldCenterLong = 21.2289
 
         // Get the FusedLocationProviderClient
         val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)

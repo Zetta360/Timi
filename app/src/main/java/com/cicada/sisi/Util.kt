@@ -33,3 +33,18 @@ fun removePartFromString(str: String, startIndex: Int, endIndex: Int): String {
     }
     return str.substring(0, startIndex) + str.substring(endIndex + 1)
 }
+
+
+fun removeCharsFromString(inputString: String, charsToRemove: List<Char>): String {
+
+    var result = inputString
+    charsToRemove.forEach { charToRemove ->
+        result = result.replace(charToRemove.toString(), "")
+    }
+    return result
+}
+
+fun String.isDouble(): Boolean {
+
+    return this.toDoubleOrNull() != null
+}
